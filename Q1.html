@@ -121,177 +121,53 @@ $(document).ready(function () {
 </div>
 
 
-<p>This part of the exam requires you to describe, execute, and interpret a data analysis. The data were obtained in a survey of students math and portuguese language courses in secondary school. It contains a lot of interesting social, gender and study information about students. Develop a model that can predict the score of students in mathematics and portuguese language courses based on predictors that you identify as having a significant impact on the outcome.</p>
-<p>Because the model is intended for use in a teaching setting, you will want to make sure that it generalizes beyond this data set. In other words, the measures of predictive performance that you report need to account for potential overfitting from not having a validation dataset. Your report should include a discussion of the important factors and their impact on predictions as well as a description of model performance. Both tables and graphs may be helpful.</p>
-<p>While there are many different ways you can model the data, you will not have time to try everything. Develop a reasonable model and if there are additional forms you do not have time to try but believe would be important to investigate, describe them in your report as future work that could be done.</p>
+<p>This part of the exam requires you to describe, execute, and interpret a data analysis. These data come from the Cebu Longitudinal Health and Nutrition Survey. The CLHNS was conducted by a team of researchers from the United States and the Philippines, the CLHNS is part of an ongoing study of a cohort of Filipino women who gave birth between May 1, 1983, and April 30, 1984. The CLHNS was originally conceptualized as a study of infant feeding patterns, particularly the overall sequencing of feeding events (i.e., of both milk and non-milk items), the various factors affecting feeding decisions at each point in time, and how different feeding patterns affect the infant, mother, and household. The idea was to study these topics within as natural a setting as possible and to analyze how infant feeding decisions by the household interact with various social, economic, and environmental factors to affect health, nutritional, demographic, and economic outcomes. The cohort of children born during that period, their mothers, other caretakers, and selected siblings have been followed through subsequent surveys conducted in 1991-92, 1994, 1999, 2002, and 2005. Research is now focused on the long-term effects of prenatal and early childhood nutrition and health on later adult outcomes, including education and work outcomes and development of chronic disease risk factors. Three Data Files are included in the github repository:</p>
+<ul>
+<li><code>data_2002.rda</code></li>
+<li><code>data_2005.rda</code></li>
+<li><code>data_2007.rda</code></li>
+</ul>
+<p>We will focus on self-rated health, wich is a metric of how an individual perceives their health status, typically on a scale from poor to excellent. As just a single question, self-rated health (SRH) is easy to collect and is widely used on health questionnaires. Despite its simplicity, it provides valuable insights to health researchers and practitioners. SRH allows individuals to incorporate their personal judgments and attitudes towards health, and thus, SRH can capture health in a more holistic manner than objective health measures. Your goal is to model SRH in the 2002, 2005 and 2007 CLHNS data. This data is longitudinal in nature and there will be many ways to analyze this. Follow these steps as you model this data:</p>
+<ol style="list-style-type: decimal">
+<li>Explore the data in all 3 years.</li>
+<li>Model SRH using the 2002 data as training data.</li>
+<li>Predict SRH in 2005 and 2007.</li>
+</ol>
+<p>While there are many different ways you can model the data, you will not have time to try everything. Develop a reasonable model and if there are additional forms you do not have time to try but believe would be important to investigate, describe them in your report as future work that could be done. Be sure to discuss the accuracy of the model built using the 2002 data when you predict into 2005 and 2007.</p>
 <p>Your responses should be self contained so that readers do not have to search through the exam to find relevant output. Feel free to cut and paste from computer output, but please make sure tables and/or graphs are properly formatted and easy to read. Be succinct. Your report probably does not need to exceed 5 pages. You do not need to summarize every step you took, but should describe clearly your final results including:</p>
 <ul>
 <li>Description and justification of analytic method</li>
-<li>Summary of key findings with a plain language summary abstract that explains major results to a non- technical reader.</li>
+<li>Summary of key findings with a plain language summary abstract that explains major results to a non-technical reader.</li>
+<li>Be sure to</li>
 <li>Tables and/or figures as needed</li>
 <li>An appendix that includes the computer programs used to carry out the analyses. Please annotate the program to indicate which parts were used to answer specific items. This will help the grader when an answer differs from what is expected.</li>
 </ul>
-<div id="codebook" class="section level2">
-<h2>Codebook</h2>
-<p>Attributes for both student-mat.csv (Math course) and student-por.csv (Portuguese language course) datasets:</p>
-<table>
-<colgroup>
-<col width="15%"></col>
-<col width="84%"></col>
-</colgroup>
-<thead>
-<tr class="header">
-<th>Variable Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>school</td>
-<td>student’s school (binary: ‘GP’ - Gabriel Pereira or ‘MS’ - Mousinho da Silveira)</td>
-</tr>
-<tr class="even">
-<td>sex</td>
-<td>student’s sex (binary: ‘F’ - female or ‘M’ - male)</td>
-</tr>
-<tr class="odd">
-<td>age</td>
-<td>student’s age (numeric: from 15 to 22)</td>
-</tr>
-<tr class="even">
-<td>address</td>
-<td>student’s home address type (binary: ‘U’ - urban or ‘R’ - rural)</td>
-</tr>
-<tr class="odd">
-<td>famsize</td>
-<td>family size (binary: ‘LE3’ - less or equal to 3 or ‘GT3’ - greater than 3)</td>
-</tr>
-<tr class="even">
-<td>Pstatus</td>
-<td>parent’s cohabitation status (binary: ‘T’ - living together or ‘A’ - apart)</td>
-</tr>
-<tr class="odd">
-<td>Medu</td>
-<td>mother’s education (numeric: 0 - none, 1 - primary education (4th grade), 2 – 5th to 9th grade, 3 – secondary education or 4 – higher education)</td>
-</tr>
-<tr class="even">
-<td>Fedu</td>
-<td>father’s education (numeric: 0 - none, 1 - primary education (4th grade), 2 – 5th to 9th grade, 3 – secondary education or 4 – higher education)</td>
-</tr>
-<tr class="odd">
-<td>Mjob</td>
-<td>mother’s job (nominal: ‘teacher’, ‘health’ care related, civil ‘services’ (e.g. administrative or police), ‘at_home’ or ‘other’)</td>
-</tr>
-<tr class="even">
-<td>Fjob</td>
-<td>father’s job (nominal: ‘teacher’, ‘health’ care related, civil ‘services’ (e.g. administrative or police), ‘at_home’ or ‘other’)</td>
-</tr>
-<tr class="odd">
-<td>reason</td>
-<td>reason to choose this school (nominal: close to ‘home’, school ‘reputation’, ‘course’ preference or ‘other’)</td>
-</tr>
-<tr class="even">
-<td>guardian</td>
-<td>student’s guardian (nominal: ‘mother’, ‘father’ or ‘other’)</td>
-</tr>
-<tr class="odd">
-<td>traveltime</td>
-<td>home to school travel time (numeric: 1 - &lt;15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - &gt;1 hour)</td>
-</tr>
-<tr class="even">
-<td>studytime</td>
-<td>weekly study time (numeric: 1 - &lt;2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - &gt;10 hours)</td>
-</tr>
-<tr class="odd">
-<td>schoolsup</td>
-<td>extra educational support (binary: yes or no)</td>
-</tr>
-<tr class="even">
-<td>famsup</td>
-<td>family educational support (binary: yes or no)</td>
-</tr>
-<tr class="odd">
-<td>paid</td>
-<td>extra paid classes within the course subject (Math or Portuguese) (binary: yes or no)</td>
-</tr>
-<tr class="even">
-<td>activities</td>
-<td>extra-curricular activities (binary: yes or no)</td>
-</tr>
-<tr class="odd">
-<td>nursery</td>
-<td>attended nursery school (binary: yes or no)</td>
-</tr>
-<tr class="even">
-<td>higher</td>
-<td>wants to take higher education (binary: yes or no)</td>
-</tr>
-<tr class="odd">
-<td>internet</td>
-<td>Internet access at home (binary: yes or no)</td>
-</tr>
-<tr class="even">
-<td>romantic</td>
-<td>with a romantic relationship (binary: yes or no)</td>
-</tr>
-<tr class="odd">
-<td>famrel</td>
-<td>quality of family relationships (numeric: from 1 - very bad to 5 - excellent)</td>
-</tr>
-<tr class="even">
-<td>freetime</td>
-<td>free time after school (numeric: from 1 - very low to 5 - very high)</td>
-</tr>
-<tr class="odd">
-<td>goout</td>
-<td>going out with friends (numeric: from 1 - very low to 5 - very high)</td>
-</tr>
-<tr class="even">
-<td>Dalc</td>
-<td>workday alcohol consumption (numeric: from 1 - very low to 5 - very high)</td>
-</tr>
-<tr class="odd">
-<td>Walc</td>
-<td>weekend alcohol consumption (numeric: from 1 - very low to 5 - very high)</td>
-</tr>
-<tr class="even">
-<td>health</td>
-<td>current health status (numeric: from 1 - very bad to 5 - very good)</td>
-</tr>
-<tr class="odd">
-<td>absences</td>
-<td>number of school absences (numeric: from 0 to 93)</td>
-</tr>
-</tbody>
-</table>
-<p>These grades are related with the course subject, Math or Portuguese:</p>
-<table>
-<thead>
-<tr class="header">
-<th>Grade</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>G1</td>
-<td>first period grade (numeric: from 0 to 20)</td>
-</tr>
-<tr class="even">
-<td>G2</td>
-<td>second period grade (numeric: from 0 to 20)</td>
-</tr>
-<tr class="odd">
-<td>G3</td>
-<td>final grade (numeric: from 0 to 20, output target)</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Additional note</strong>: there are several (382) students that belong to both datasets . These students can be identified by searching for identical attributes that characterize each student, as shown in the annexed R file.</p>
-<p>Source Information</p>
-<p>P. Cortez and A. Silva. Using Data Mining to Predict Secondary School Student Performance. In A. Brito and J. Teixeira Eds., Proceedings of 5th FUture BUsiness TEChnology Conference (FUBUTEC 2008) pp. 5-12, Porto, Portugal, April, 2008, EUROSIS, ISBN 978-9077381-39-7.</p>
-<p>Fabio Pagnotta, Hossain Mohammad Amran. Email:<a href="mailto:fabio.pagnotta@studenti.unicam.it">fabio.pagnotta@studenti.unicam.it</a>, mohammadamra.hossain ‘@’ studenti.unicam.it University Of Camerino</p>
-<p><a href="https://archive.ics.uci.edu/ml/datasets/Student+Performance">Student Performance Data</a></p>
+<div id="files-and-attachments" class="section level2">
+<h2>Files and Attachments</h2>
+<ol style="list-style-type: decimal">
+<li>Data Folders</li>
+</ol>
+<ul>
+<li>The folders marked for the individual years contains the tab separated files of the different databases used in the data.</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Data Scripts</li>
+</ol>
+<ul>
+<li>These files display the pre-processing and cleaning which has already been completed on the data files that you will be using.</li>
+<li>Consult this in order to see what variables are included in the data.</li>
+<li>The particular <code>variables_200*.txt</code> files will display what variables were placed into the data files.</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Codebook
+<ul>
+<li>There is a folder labeled codebook. This contains the codebook for the particular combined questionairs from 2002, 2005 and 2007.</li>
+</ul></li>
+<li><code>data_200*.rda</code>
+<ul>
+<li>These are the individual data files for each of the given years.</li>
+</ul></li>
+</ol>
 </div>
 
 

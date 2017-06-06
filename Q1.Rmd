@@ -10,82 +10,41 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 
-This part of the exam requires you to describe, execute, and interpret a data analysis.  The data were obtained in a survey of students math and portuguese language courses in secondary school. It contains a lot of interesting social, gender and study information about students.  Develop a model that can predict the score of students in mathematics and portuguese language courses based on predictors that you identify as having a significant impact on the outcome.
+This part of the exam requires you to describe, execute, and interpret a data analysis. These data come from the Cebu Longitudinal Health and Nutrition Survey. The CLHNS was conducted by a team of researchers from the United States and the Philippines, the CLHNS is part of an ongoing study of a cohort of Filipino women who gave birth between May 1, 1983, and April 30, 1984. The CLHNS was originally conceptualized as a study of infant feeding patterns, particularly the overall sequencing of feeding events (i.e., of both milk and non-milk items), the various factors affecting feeding decisions at each point in time, and how different feeding patterns affect the infant, mother, and household. The idea was to study these topics within as natural a setting as possible and to analyze how infant feeding decisions by the household interact with various social, economic, and environmental factors to affect health, nutritional, demographic, and economic outcomes. The cohort of children born during that period, their mothers, other caretakers, and selected siblings have been followed through subsequent surveys conducted in 1991-92, 1994, 1999, 2002, and 2005. Research is now focused on the long-term effects of prenatal and early childhood nutrition and health on later adult outcomes, including education and work outcomes and development of chronic disease risk factors. Three Data Files are included in the github repository:
 
-Because the model is intended for use in a teaching setting, you will want to make sure that it generalizes beyond this data set. In other words, the measures of predictive performance that you report need to account for potential overfitting from not having a validation dataset. Your report should include a discussion of the
-important factors and their impact on predictions as well as a description of model performance. Both tables
-and graphs may be helpful.
+- `data_2002.rda`
+- `data_2005.rda`
+- `data_2007.rda`
 
-While there are many different ways you can model the data, you will not have time to try everything.
-Develop a reasonable model and if there are additional forms you do not have time to try but believe would
-be important to investigate, describe them in your report as future work that could be done.
+We will focus on self-rated health, wich is a metric of how an individual perceives their health status, typically on a scale from poor to excellent. As just a single question, self-rated health (SRH) is easy to collect and is widely used on health questionnaires. Despite its simplicity, it provides valuable insights to health researchers and practitioners. SRH allows individuals to incorporate their personal judgments and attitudes towards health, and thus, SRH can capture health in a more holistic manner than objective health measures. Your goal is to model SRH in the 2002, 2005 and 2007 CLHNS data. This data is longitudinal in nature and there will be many ways to analyze this. Follow these steps as you model this data:
 
-Your responses should be self contained so that readers do not have to search through the exam to find
-relevant output. Feel free to cut and paste from computer output, but please make sure tables and/or graphs
-are properly formatted and easy to read. Be succinct. Your report probably does not need to exceed 5 pages.
-You do not need to summarize every step you took, but should describe clearly your final results including:
+1. Explore the data in all 3 years. 
+2. Model SRH using the 2002 data as training data. 
+3. Predict SRH in 2005 and 2007. 
+
+While there are many different ways you can model the data, you will not have time to try everything. Develop a reasonable model and if there are additional forms you do not have time to try but believe would be important to investigate, describe them in your report as future work that could be done. Be sure to discuss the accuracy of the model built using the 2002 data when you predict into 2005 and 2007. 
+
+Your responses should be self contained so that readers do not have to search through the exam to find relevant output. Feel free to cut and paste from computer output, but please make sure tables and/or graphs are properly formatted and easy to read. Be succinct. Your report probably does not need to exceed 5 pages. You do not need to summarize every step you took, but should describe clearly your final results including:
+
 
 - Description and justification of analytic method
-- Summary of key findings with a plain language summary abstract that explains major results to a non-
-technical reader.
+- Summary of key findings with a plain language summary abstract that explains major results to a non-technical reader.
+- Be sure to 
 - Tables and/or figures as needed
 - An appendix that includes the computer programs used to carry out the analyses. Please annotate the program to indicate which parts were used to answer specific items. This will help the grader when an answer differs from what is expected.
 
 
-## Codebook
-
-Attributes for both student-mat.csv (Math course) and student-por.csv (Portuguese language course) datasets:
 
 
+## Files and Attachments
 
-
-| Variable Name | Description  |
-| ------------- | ------------------------------------------------------------------------------  |
-| school | student's school (binary: 'GP' - Gabriel Pereira or 'MS' - Mousinho da Silveira) | 
-| sex | student's sex (binary: 'F' - female or 'M' - male) | 
-| age | student's age (numeric: from 15 to 22) | 
-| address | student's home address type (binary: 'U' - urban or 'R' - rural) | 
-| famsize | family size (binary: 'LE3' - less or equal to 3 or 'GT3' - greater than 3) | 
-| Pstatus | parent's cohabitation status (binary: 'T' - living together or 'A' - apart) | 
-| Medu |  mother's education (numeric: 0 - none, 1 - primary education (4th grade), 2 – 5th to 9th grade, 3 – secondary education or 4 – higher education) | 
-| Fedu | father's education (numeric: 0 - none, 1 - primary education (4th grade), 2 – 5th to 9th grade, 3 – secondary education or 4 – higher education) | 
-| Mjob | mother's job (nominal: 'teacher', 'health' care related, civil 'services' (e.g. administrative or police), 'at_home' or 'other') | 
-| Fjob | father's job (nominal: 'teacher', 'health' care related, civil 'services' (e.g. administrative or police), 'at_home' or 'other') | 
-| reason | reason to choose this school (nominal: close to 'home', school 'reputation', 'course' preference or 'other') | 
-| guardian | student's guardian (nominal: 'mother', 'father' or 'other') | 
-| traveltime | home to school travel time (numeric: 1 - <15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - >1 hour) | 
-| studytime | weekly study time (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours) | | failures | number of past class failures (numeric: n if 1<=n<3, else 4) | 
-| schoolsup | extra educational support (binary: yes or no) | 
-| famsup | family educational support (binary: yes or no) | 
-| paid | extra paid classes within the course subject (Math or Portuguese) (binary: yes or no) | 
-| activities | extra-curricular activities (binary: yes or no) | 
-| nursery | attended nursery school (binary: yes or no) | 
-| higher | wants to take higher education (binary: yes or no) | 
-| internet | Internet access at home (binary: yes or no) | 
-| romantic | with a romantic relationship (binary: yes or no) | 
-| famrel | quality of family relationships (numeric: from 1 - very bad to 5 - excellent) | 
-| freetime | free time after school (numeric: from 1 - very low to 5 - very high) | 
-| goout | going out with friends (numeric: from 1 - very low to 5 - very high) | 
-| Dalc | workday alcohol consumption (numeric: from 1 - very low to 5 - very high) | 
-| Walc | weekend alcohol consumption (numeric: from 1 - very low to 5 - very high) | 
-| health | current health status (numeric: from 1 - very bad to 5 - very good) | 
-| absences | number of school absences (numeric: from 0 to 93) | 
-
-These grades are related with the course subject, Math or Portuguese:
-
-| Grade | Description |
-| ----- | -------------------------------------------|
-| G1 | first period grade (numeric: from 0 to 20) |
-| G2 | second period grade (numeric: from 0 to 20) | 
-| G3 | final grade (numeric: from 0 to 20, output target) | 
-
-
-**Additional note**: there are several (382) students that belong to both datasets . These students can be identified by searching for identical attributes that characterize each student, as shown in the annexed R file.
-
-Source Information
-
-P. Cortez and A. Silva. Using Data Mining to Predict Secondary School Student Performance. In A. Brito and J. Teixeira Eds., Proceedings of 5th FUture BUsiness TEChnology Conference (FUBUTEC 2008) pp. 5-12, Porto, Portugal, April, 2008, EUROSIS, ISBN 978-9077381-39-7.
-
-Fabio Pagnotta, Hossain Mohammad Amran. Email:fabio.pagnotta@studenti.unicam.it, mohammadamra.hossain '@' studenti.unicam.it University Of Camerino
-
-[Student Performance Data](https://archive.ics.uci.edu/ml/datasets/Student+Performance)
+1. Data Folders
+  - The folders marked for the individual years contains the tab separated files of the different databases used in the data. 
+2. Data Scripts
+  - These files display the pre-processing and cleaning which has already been completed on the data files that you will be using. 
+  - Consult this in order to see what variables are included in the data.
+   - The particular `variables_200*.txt` files will display what variables were placed into the data files.
+3. Codebook
+    - There is a folder labeled codebook. This contains the codebook for the particular combined questionairs from 2002, 2005 and 2007. 
+4. `data_200*.rda`
+    - These are the individual data files for each of the given years. 

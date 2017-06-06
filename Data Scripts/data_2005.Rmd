@@ -1,0 +1,104 @@
+# Load Data for 2005
+hhold <- read.delim("2005/hhold.tab", sep = "\t") 
+morbidty <- read.delim("2005/morbidty.tab", sep = "\t") 
+mother <- read.delim("2005/mother.tab", sep = "\t") 
+person <- read.delim("2005/person.tab", sep = "\t") 
+secreen <- read.delim("2005/screen.tab", sep = "\t")
+
+
+# Select only moms from 2005 data
+person <- person[person$relmom==0, ] 
+
+# Remove duplicate rows from "mothers" (same mother has 2 rows, one for each child)
+## select columns that are not about children (and thus, will be the identical for a mother)
+## 2029 rows initially - 11 duplicates = 2018 rows
+mother <- mother[ , 1:125]
+sum(duplicated(mother))
+mother <- mother[!duplicated(mother), ]
+
+# Merge 2005 Data
+common_columns <- c("basebrgy", "basehhno", "basewman", "uncmomid", "BRGAY05","HHNUMB05","WOMAN05", "MOMCH05")
+data_2005 <- merge(hhold, morbidty, by = common_columns)
+data_2005 <- merge(data_2005, mother, by = common_columns)
+data_2005 <- merge(data_2005, person, by = common_columns)
+data_2005 <- merge(data_2005, secreen, by = common_columns)
+
+
+# Retrieve women who died or moved since 2002
+## 67 moved (23 of which are not in data_2005), 6 died (all of which are not in data_2005)
+moved_2005 <- subset(secreen, notinhh==2)
+died_2005 <- subset(secreen, notinhh==1)
+length(setdiff(unique(moved_2005$uncmomid), unique(data_2005$uncmomid)))
+length(setdiff(unique(died_2005$uncmomid), unique(data_2005$uncmomid)))
+
+# Change variable names to lowercase
+names(data_2005) <- tolower(names(data_2005)) 
+names(moved_2005) <- tolower(names(moved_2005)) 
+names(died_2005) <- tolower(names(died_2005)) 
+
+# Select columns of interest
+var_2005 <- readLines("Data Scripts/variables_2005.txt")
+names(data_2005)[names(data_2005) == 'age.x'] <- 'age'
+data_2005 <- subset(data_2005, select=var_2005)
+
+# Replace -9 values with "NA"
+data_2005[data_2005==-9] <- NA
+
+# Create new columns
+## SRH index (0 for poor health, 1 for good or excellent)
+data_2005$srh <- ifelse(data_2005$genhealt >= 2, 1, 0)
+## education index (hs and college, 0 for none, 1 for at least one year)
+data_2005$hs <- ifelse(data_2005$gradecom >= 8, 1, 0)
+data_2005$college <- ifelse(data_2005$gradecom >= 12, 1, 0)
+## assets index
+### scale from 0-4, 1 point each for ownership of vehicle (cars, trucks), aircon, fridge, TV
+data_2005$vehicle <- data_2005$cars + data_2005$trucks
+data_2005$vehicleI <- ifelse(data_2005$vehicle >= 1, 1, 0)
+data_2005$tv <- data_2005$colortv + data_2005$tvcable
+data_2005$tvI <- ifelse(data_2005$tv >= 1, 1, 0)
+data_2005$refrigerI <- ifelse(data_2005$refriger >= 1, 1, 0)
+data_2005$airconI <- ifelse(data_2005$aircon >= 1, 1, 0)
+data_2005$assets <- data_2005$vehicleI + data_2005$tvI + data_2005$refrigerI + data_2005$airconI
+## illness index
+data_2005$illness <- data_2005$diabete + data_2005$heartdis + data_2005$cancer + data_2005$tubercu + data_2005$hblood + data_2005$goiter + data_2005$anemia + data_2005$hepatiti + data_2005$arthriti + data_2005$utracti + data_2005$std + data_2005$pregprob
+## functional limitations index
+data_2005$hhchoresI <- ifelse(data_2005$hhchores >= 2, 1, 0)
+data_2005$standI <- ifelse(data_2005$stand >= 2, 1, 0)
+data_2005$walk1kmI <- ifelse(data_2005$walk1km >= 2, 1, 0)
+data_2005$climbI <- ifelse(data_2005$climb >= 2, 1, 0)
+data_2005$carrywtI <- ifelse(data_2005$carrywt >= 2, 1, 0)
+data_2005$funclim <- data_2005$hhchoresI + data_2005$standI + data_2005$walk1kmI + data_2005$climbI + data_2005$carrywtI
+## recode smoking and alcohol
+data_2005$smoking <- data_2005$masmoke
+data_2005$smoking <- ifelse(data_2005$numstick <= 0 | is.na(data_2005$numstick), 0, 1)
+data_2005$alcohol <- ifelse(data_2005$oftdrink <= 1 | is.na(data$oftdrink), 0, 1)
+## mental / emotional health index
+data_2005$headacheI <- ifelse(data_2005$headache >= 2, 1, 0)
+data_2005$digestnI <- ifelse(data_2005$digestn >= 2, 1, 0)
+data_2005$diffslepI <- ifelse(data_2005$diffslep >= 2, 1, 0)
+data_2005$lonelyI <- ifelse(data_2005$lonely >= 2, 1, 0)
+data_2005$unfrndlyI <- ifelse(data_2005$unfrndly >= 2, 1, 0)
+data_2005$worriedI <- ifelse(data_2005$worried >= 2, 1, 0)
+data_2005$overcomeI <- ifelse(data_2005$overcome >= 2, 1, 0)
+data_2005$dislikedI <- ifelse(data_2005$disliked >= 2, 1, 0)
+data_2005$worthlesI <- ifelse(data_2005$worthles >= 2, 1, 0)
+data_2005$livingI <- ifelse(data_2005$living >= 2, 1, 0)
+data_2005$wishdeadI <- ifelse(data_2005$wishdead >= 2, 1, 0)
+data_2005$takelifeI <- ifelse(data_2005$takelife >= 2, 1, 0)
+data_2005$depress <- data_2005$headacheI + data_2005$digestnI + data_2005$diffslepI + data_2005$lonelyI + data_2005$unfrndlyI + data_2005$worriedI + data_2005$overcomeI + data_2005$dislikedI + data_2005$worthlesI + data_2005$livingI + data_2005$wishdeadI + data_2005$takelifeI
+## BMI (5 NA for weightma, 7 NA for heightma, 10 pregnant, 19 NA for bmi)
+#### no BMI for pregnant women
+data_2005[is.na(data_2005$weightma) | data_2005$weightma <= 0, "weightma"] <- NA
+data_2005[is.na(data_2005$heightma) | data_2005$heightma <= 0, "heightma"] <- NA
+data_2005$bmi <- data_2005$weightma / (data_2005$heightma/100)^2
+data_2005[is.na(data_2005$pregnow) | data_2005$pregnow == 1, "bmi"] <- NA
+data_2005$bmicat <- ifelse(data_2005$bmi < 18.5, "underweight", ifelse(data_2005$bmi >= 18.5 & data_2005$bmi < 25, "normal", ifelse(data_2005$bmi >= 25 & data_2005$bmi < 30, "overweight", "obese")))
+
+# Drop unwanted data and values from environment
+rm( hhold, morbidty, mother, person, secreen, common_columns, var_2005)
+
+# Sort based on uncmomid
+data_2005 <- data_2005[order(data_2005$uncmomid), ] 
+
+# Save data
+save(data_2005, file="data_2005.rda")
