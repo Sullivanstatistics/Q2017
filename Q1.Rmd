@@ -10,7 +10,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 
-This part of the exam requires you to describe, execute, and interpret a data analysis. These data come from the Cebu Longitudinal Health and Nutrition Survey(CLHNS) that was conducted by a team of researchers from the United States and the Philippines. The CLHNS is a cohort of Filipino women who gave birth between May 1, 1983, and April 30, 1984. The CLHNS was originally conceptualized as a study of infant feeding patterns, particularly the overall sequencing of feeding events (i.e., of both milk and non-milk items), the various factors affecting feeding decisions at each point in time, and how different feeding patterns affect the infant, mother, and household. The idea was to study these topics within as natural a setting as possible and to analyze how infant feeding decisions by the household interact with various social, economic, and environmental factors to affect health, nutritional, demographic, and economic outcomes. The cohort of children born during that period, their mothers, other caretakers, and selected siblings have been followed through subsequent surveys conducted in 1991-92, 1994, 1999, 2002, and 2005. Research is now focused on the long-term effects of prenatal and early childhood nutrition and health on later adult outcomes, including education and work outcomes and development of chronic disease risk factors. Three Data Files are included in the github repository:
+This part of the exam requires you to describe, execute, and interpret a data analysis. These data come from the Cebu Longitudinal Health and Nutrition Survey(CLHNS) that was conducted by a team of researchers from the United States and the Philippines. The CLHNS is a cohort of Filipino women who gave birth between May 1, 1983 and April 30, 1984. The CLHNS was originally conceptualized as a study of infant feeding patterns, particularly the overall sequencing of feeding events (i.e., of both milk and non-milk items), the various factors affecting feeding decisions at each point in time, and how different feeding patterns affect the infant, mother, and household. The idea was to study these topics within as natural a setting as possible and to analyze how infant feeding decisions by the household interact with various social, economic, and environmental factors to affect health, nutritional, demographic, and economic outcomes. The cohort of children born during that period, their mothers, other caretakers, and selected siblings have been followed through subsequent surveys conducted in 1991-92, 1994, 1999, 2002, and 2005. 
+
+Research is now focused on the long-term effects of prenatal and early childhood nutrition and health on later adult outcomes, including education and work outcomes and development of chronic disease risk factors. Three Data Files are included in the github repository:
 
 - `data_2002.rda`
 - `data_2005.rda`
@@ -27,9 +29,10 @@ While there are many different ways you can model the data, you will not have ti
 Your responses should be self contained so that readers do not have to search through the exam to find relevant outputs. Feel free to cut and paste from computer output, but please make sure tables and/or graphs are properly formatted and easy to read. Be succinct. Your report probably does not need to exceed 5 pages. You do not need to summarize every step you took, but should describe clearly your final results including:
 
 
-- Description and justification of analytic method
+- Description and justification of analytic method. 
 - Summary of key findings with a plain language summary abstract that explains major results to a non-technical reader.
-- Tables and/or figures as needed
+- Provide tables and/or figures as needed. 
+- Discuss limitations (if any) in your method, data, etc. 
 - An appendix that includes the computer programs used to carry out the analyses. Please annotate the program to indicate which parts were used to answer specific items. This will help the grader when an answer differs from what is expected.
 
 
