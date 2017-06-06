@@ -1,7 +1,7 @@
 ---
 title: "Qualifying Exam 2017"
 subtitle: "Take Home Question 1"
-output: html_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -16,7 +16,7 @@ This part of the exam requires you to describe, execute, and interpret a data an
 - `data_2005.rda`
 - `data_2007.rda`
 
-We will focus on self-rated health, wich is a metric of how an individual perceives their health status, typically on a scale from poor to excellent. As just a single question, self-rated health (SRH) is easy to collect and is widely used on health questionnaires. Despite its simplicity, it provides valuable insights to health researchers and practitioners. SRH allows individuals to incorporate their personal judgments and attitudes towards health, and thus, SRH can capture health in a more holistic manner than objective health measures. Your goal is to model SRH in the 2002, 2005 and 2007 CLHNS data. This data is longitudinal in nature and there will be many ways to analyze this. Follow these steps as you model this data:
+We will focus on self-rated health, which is a metric of how an individual perceives their health status, typically on a scale from poor to excellent. As just a single question, self-rated health (SRH) is easy to collect and is widely used on health questionnaires. Despite its simplicity, it provides valuable insights to health researchers and practitioners. SRH allows individuals to incorporate their personal judgments and attitudes towards health, and thus, SRH can capture health in a more holistic manner than objective health measures. Your goal is to model SRH in the 2002, 2005 and 2007 CLHNS data. This data is longitudinal in nature and there will be many ways to analyze this. Follow these steps as you model this data:
 
 1. Explore the data in all 3 years. 
 2. Model SRH using the 2002 data as training data. 
@@ -45,6 +45,6 @@ Your responses should be self contained so that readers do not have to search th
   - Consult this in order to see what variables are included in the data.
    - The particular `variables_200*.txt` files will display what variables were placed into the data files.
 3. Codebook
-    - There is a folder labeled codebook. This contains the codebook for the particular combined questionairs from 2002, 2005 and 2007. 
+    - There is a folder labeled codebook. This contains the codebook for the particular combined questionnaires from 2002, 2005 and 2007. 
 4. `data_200*.rda`
     - These are the individual data files for each of the given years. 
